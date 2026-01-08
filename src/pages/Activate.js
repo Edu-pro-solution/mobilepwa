@@ -9,6 +9,18 @@ import {
 import AddUser from "./AddUser";
 import "./admin.css";
 import { useNavigate } from "react-router-dom";
+// Generate or get a persistent device ID (WEB SAFE)
+const getDeviceId = () => {
+  let deviceId = localStorage.getItem("deviceId");
+
+  if (!deviceId) {
+    deviceId = "WEB-" + crypto.randomUUID();
+    localStorage.setItem("deviceId", deviceId);
+  }
+
+  return deviceId;
+};
+
 const API_BASE = "https://eduproapi.vercel.app"; 
 const Activate = () => {
   const [activeTab, setActiveTab] = useState("key");
@@ -132,7 +144,7 @@ const [phoneNumber, setPhoneNumber] = useState("");
 
 return (
     <div className="dashboard">
-      {/* SIDEBAR */}
+      
       <aside className="sidebar">
         <div className="profile">
           <div className="avatar" />
